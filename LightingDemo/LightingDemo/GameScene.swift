@@ -9,33 +9,61 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    
+    let light = SKLightNode()
+    let label = SKLabelNode(fontNamed:"Chalkduster")
+    
+    var index = 0
+    let sprites = [ "orange", "crate", "banana", "cherries" ]
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!";
-        myLabel.fontSize = 65;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
+        let background = SKSpriteNode(texture: SKTexture(imageNamed:"background"), normalMap: SKTexture(imageNamed:"background_n"))
+        background.lightingBitMask = 1;
+        background.position = CGPointMake(size.width/2, size.height/2)
+        addChild(background)
         
-        self.addChild(myLabel)
+        label.text = "Touch to create sprites!";
+        label.position = CGPointMake(size.width/2, 60)
+        addChild(label)
+        
+        light.position = CGPointMake(size.width/2, size.height/2)
+        light.falloff = CGFloat(0.7)
+        light.ambientColor = UIColor.darkGrayColor()
+        light.lightColor = UIColor.lightGrayColor()
+        addChild(light)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         /* Called when a touch begins */
         
-        for touch in (touches as! Set<UITouch>) {
+        for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
+            if (index < 4)
+            {
+                let sprite = SKSpriteNode(texture: SKTexture(imageNamed:sprites[index]),
+                                          normalMap: SKTexture(imageNamed: sprites[index] + "_n"))
             sprite.position = location
+                sprite.lightingBitMask = 1;
+                addChild(sprite)
+                index++;
+                if (index == 4)
+                {
+                    label.text = "Touch to move light!";
+                }
+            }
+            else
+            {
+                light.position = location
+            }
+        }
+    }
             
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+        for touch: AnyObject in touches {
+            let location = touch.locationInNode(self)
+            light.position = location
         }
     }
    

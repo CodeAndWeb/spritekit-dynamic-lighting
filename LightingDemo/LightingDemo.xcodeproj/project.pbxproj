@@ -14,18 +14,8 @@
 		AAE5DD2A1B0382330028C3AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAE5DD281B0382330028C3AD /* Main.storyboard */; };
 		AAE5DD2C1B0382330028C3AD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE5DD2B1B0382330028C3AD /* Images.xcassets */; };
 		AAE5DD2F1B0382330028C3AD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAE5DD2D1B0382330028C3AD /* LaunchScreen.xib */; };
-		AAE5DD3B1B0382330028C3AD /* LightingDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE5DD3A1B0382330028C3AD /* LightingDemoTests.swift */; };
+		AAE787701B0A44D100B553B5 /* Sprites in Resources */ = {isa = PBXBuildFile; fileRef = AAE7876F1B0A44D100B553B5 /* Sprites */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		AAE5DD351B0382330028C3AD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AAE5DD131B0382330028C3AD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AAE5DD1A1B0382330028C3AD;
-			remoteInfo = LightingDemo;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		AAE5DD1B1B0382330028C3AD /* LightingDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightingDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,20 +27,13 @@
 		AAE5DD291B0382330028C3AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AAE5DD2B1B0382330028C3AD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AAE5DD2E1B0382330028C3AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		AAE5DD341B0382330028C3AD /* LightingDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightingDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE5DD391B0382330028C3AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAE5DD3A1B0382330028C3AD /* LightingDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingDemoTests.swift; sourceTree = "<group>"; };
+		AAE7876F1B0A44D100B553B5 /* Sprites */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sprites; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		AAE5DD181B0382330028C3AD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AAE5DD311B0382330028C3AD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -73,7 +56,6 @@
 			isa = PBXGroup;
 			children = (
 				AAE5DD1B1B0382330028C3AD /* LightingDemo.app */,
-				AAE5DD341B0382330028C3AD /* LightingDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -81,6 +63,7 @@
 		AAE5DD1D1B0382330028C3AD /* LightingDemo */ = {
 			isa = PBXGroup;
 			children = (
+				AAE7876F1B0A44D100B553B5 /* Sprites */,
 				AAE5DD201B0382330028C3AD /* AppDelegate.swift */,
 				AAE5DD221B0382330028C3AD /* GameScene.sks */,
 				AAE5DD241B0382330028C3AD /* GameScene.swift */,
@@ -138,24 +121,6 @@
 			productReference = AAE5DD1B1B0382330028C3AD /* LightingDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AAE5DD331B0382330028C3AD /* LightingDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AAE5DD411B0382330028C3AD /* Build configuration list for PBXNativeTarget "LightingDemoTests" */;
-			buildPhases = (
-				AAE5DD301B0382330028C3AD /* Sources */,
-				AAE5DD311B0382330028C3AD /* Frameworks */,
-				AAE5DD321B0382330028C3AD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AAE5DD361B0382330028C3AD /* PBXTargetDependency */,
-			);
-			name = LightingDemoTests;
-			productName = LightingDemoTests;
-			productReference = AAE5DD341B0382330028C3AD /* LightingDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -167,10 +132,7 @@
 				TargetAttributes = {
 					AAE5DD1A1B0382330028C3AD = {
 						CreatedOnToolsVersion = 6.3;
-					};
-					AAE5DD331B0382330028C3AD = {
-						CreatedOnToolsVersion = 6.3;
-						TestTargetID = AAE5DD1A1B0382330028C3AD;
+						DevelopmentTeam = 8P8584JRFS;
 					};
 				};
 			};
@@ -188,7 +150,6 @@
 			projectRoot = "";
 			targets = (
 				AAE5DD1A1B0382330028C3AD /* LightingDemo */,
-				AAE5DD331B0382330028C3AD /* LightingDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -202,13 +163,7 @@
 				AAE5DD2C1B0382330028C3AD /* Images.xcassets in Resources */,
 				AAE5DD231B0382330028C3AD /* GameScene.sks in Resources */,
 				AAE5DD2A1B0382330028C3AD /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AAE5DD321B0382330028C3AD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				AAE787701B0A44D100B553B5 /* Sprites in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,23 +180,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AAE5DD301B0382330028C3AD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AAE5DD3B1B0382330028C3AD /* LightingDemoTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		AAE5DD361B0382330028C3AD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AAE5DD1A1B0382330028C3AD /* LightingDemo */;
-			targetProxy = AAE5DD351B0382330028C3AD /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AAE5DD281B0382330028C3AD /* Main.storyboard */ = {
@@ -348,6 +287,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = LightingDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -358,43 +298,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = LightingDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		AAE5DD421B0382330028C3AD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = LightingDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LightingDemo.app/LightingDemo";
-			};
-			name = Debug;
-		};
-		AAE5DD431B0382330028C3AD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = LightingDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LightingDemo.app/LightingDemo";
 			};
 			name = Release;
 		};
@@ -417,14 +324,7 @@
 				AAE5DD401B0382330028C3AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		AAE5DD411B0382330028C3AD /* Build configuration list for PBXNativeTarget "LightingDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AAE5DD421B0382330028C3AD /* Debug */,
-				AAE5DD431B0382330028C3AD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

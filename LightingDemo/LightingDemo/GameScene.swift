@@ -14,7 +14,6 @@ class GameScene: SKScene {
     var _screenH: CGFloat = 640.0
     var _screenW: CGFloat = 960.0
     let _fps = 8.0
-    let _light = SKLightNode()
     var _lightSprite:SKSpriteNode?
     var _backgroundSprite1: SKSpriteNode?
     var _backgroundSprite2: SKSpriteNode?
@@ -89,11 +88,13 @@ class GameScene: SKScene {
         _lightSprite?.position = CGPointMake(_screenW - 100, _screenH - 100)
         addChild(_lightSprite!);
         
-        _light.position = CGPointMake(0,0)
-        _light.falloff = 1
-        _light.ambientColor = UIColor.darkGrayColor()
-        _light.lightColor = UIColor.whiteColor()
-        _lightSprite?.addChild(_light)
+        var light = SKLightNode();
+        light.position = CGPointMake(0,0)
+        light.falloff = 1
+        light.ambientColor = UIColor.darkGrayColor()
+        light.lightColor = UIColor.whiteColor()
+        
+        _lightSprite?.addChild(light)
     }
     
     func initBackground()

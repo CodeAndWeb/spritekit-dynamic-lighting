@@ -13,18 +13,20 @@ class GameScene: SKScene {
     var _scale: CGFloat = 1.0
     var _screenH: CGFloat = 640.0
     var _screenW: CGFloat = 960.0
-    let _fps = 8.0
     var _lightSprite:SKSpriteNode?
     var _backgroundSprite1: SKSpriteNode?
     var _backgroundSprite2: SKSpriteNode?
     var _foregroundSprite1: SKSpriteNode?
     var _foregroundSprite2: SKSpriteNode?
+    var _ambientColor:UIColor?
     
     override func didMoveToView(view: SKView)
     {
         _screenH = view.frame.height
         _screenW = view.frame.width
         _scale = _screenW / 1920
+
+        _ambientColor = UIColor.darkGrayColor()
 
         initBackground()
         initSprite()
@@ -57,7 +59,7 @@ class GameScene: SKScene {
         _foregroundSprite2?.position = CGPoint(x:_scale*(1920+foregroundOffset), y:y)
     }
     
-    func initSprite()
+    private func initSprite()
     {
         var animFrames = [SKTexture]()
         var normals = [SKTexture]()
@@ -65,10 +67,13 @@ class GameScene: SKScene {
             animFrames.append(SKTexture(imageNamed: String(format:"Sprites/character/%02d.png", index)))
             normals.append(SKTexture(imageNamed: String(format:"Sprites/character/%02d_n.png", index)))
         }
+        
         let sprite = SKSpriteNode(texture: animFrames[0], normalMap: normals[0])
         
+        let fps = 8.0
+
         let anim = SKAction.customActionWithDuration(1.0, actionBlock: { node, time in
-            let index = Int((self._fps * Double(time))) % animFrames.count
+            let index = Int((fps * Double(time))) % animFrames.count
             (node as! SKSpriteNode).normalTexture = normals[index]
             (node as! SKSpriteNode).texture = animFrames[index]
         })
@@ -81,7 +86,7 @@ class GameScene: SKScene {
         addChild(sprite)
     }
     
-    func initLight()
+    private func initLight()
     {
         _lightSprite = SKSpriteNode(imageNamed: "Sprites/lightbulb.png")
         _lightSprite?.setScale(_scale * 2)
@@ -91,13 +96,13 @@ class GameScene: SKScene {
         var light = SKLightNode();
         light.position = CGPointMake(0,0)
         light.falloff = 1
-        light.ambientColor = UIColor.darkGrayColor()
+        light.ambientColor = _ambientColor
         light.lightColor = UIColor.whiteColor()
         
         _lightSprite?.addChild(light)
     }
     
-    func initBackground()
+    private func initBackground()
     {
         backgroundColor = SKColor.blackColor()
         _backgroundSprite1 = addBackgroundTile("Sprites/background_01.png");
@@ -106,7 +111,7 @@ class GameScene: SKScene {
         _foregroundSprite2 = addForegroundTile("Sprites/foreground_02.png", normalsFile:"Sprites/foreground_02_n.png");
     }
     
-    func addForegroundTile(spriteFile: String, normalsFile: String) -> SKSpriteNode
+    private func addForegroundTile(spriteFile: String, normalsFile: String) -> SKSpriteNode
     {
         var foreground:SKSpriteNode
         
@@ -120,12 +125,12 @@ class GameScene: SKScene {
         return foreground;
     }
 
-    func addBackgroundTile(spriteFile: String) -> SKSpriteNode
+    private func addBackgroundTile(spriteFile: String) -> SKSpriteNode
     {
         var background:SKSpriteNode
 
         background = SKSpriteNode(imageNamed:spriteFile);
-        background.color = _light.ambientColor
+        background.color = _ambientColor!
         background.colorBlendFactor = 0.75
         
         background.anchorPoint = CGPoint(x:0, y:0.5)

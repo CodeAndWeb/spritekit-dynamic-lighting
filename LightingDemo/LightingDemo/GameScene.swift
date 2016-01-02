@@ -33,13 +33,13 @@ class GameScene: SKScene {
         initLight()
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
     {
         for touch: AnyObject in touches {
             _lightSprite?.position = touch.locationInNode(self)
         }
     }
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent)
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?)
     {
         for touch: AnyObject in touches {
             _lightSprite?.position = touch.locationInNode(self)
@@ -48,13 +48,13 @@ class GameScene: SKScene {
    
     override func update(currentTime: CFTimeInterval)
     {
-        var y:CGFloat = _screenH / 2.0;
+        let y:CGFloat = _screenH / 2.0;
         
-        var backgroundOffset: CGFloat = -CGFloat(Int(currentTime*100) % (1920*2));
+        let backgroundOffset: CGFloat = -CGFloat(Int(currentTime*100) % (1920*2));
         _backgroundSprite1?.position = CGPoint(x:_scale*((backgroundOffset < -1920) ? (3840+backgroundOffset) : backgroundOffset), y:y)
         _backgroundSprite2?.position = CGPoint(x:_scale*(1920+backgroundOffset), y:y)
 
-        var foregroundOffset: CGFloat = -CGFloat(Int(currentTime*250) % (1920*2));
+        let foregroundOffset: CGFloat = -CGFloat(Int(currentTime*250) % (1920*2));
         _foregroundSprite1?.position = CGPoint(x:_scale*((foregroundOffset < -1920) ? (3840+foregroundOffset) : foregroundOffset), y:y)
         _foregroundSprite2?.position = CGPoint(x:_scale*(1920+foregroundOffset), y:y)
     }
@@ -93,10 +93,10 @@ class GameScene: SKScene {
         _lightSprite?.position = CGPointMake(_screenW - 100, _screenH - 100)
         addChild(_lightSprite!);
         
-        var light = SKLightNode();
+        let light = SKLightNode();
         light.position = CGPointMake(0,0)
         light.falloff = 1
-        light.ambientColor = _ambientColor
+        light.ambientColor = _ambientColor!
         light.lightColor = UIColor.whiteColor()
         
         _lightSprite?.addChild(light)

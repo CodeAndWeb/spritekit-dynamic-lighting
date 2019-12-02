@@ -3,64 +3,59 @@
 //  LightingDemo
 //
 //  Created by Joachim Grill on 13.05.15.
-//  Copyright (c) 2015 CodeAndWeb GmbH. All rights reserved.
+//  Copyright (c) 2019 CodeAndWeb GmbH. All rights reserved.
 //
 
 import SpriteKit
 
 class GameScene: SKScene {
-    
     var _scale: CGFloat = 1.0
     var _screenH: CGFloat = 640.0
     var _screenW: CGFloat = 960.0
-    var _lightSprite:SKSpriteNode?
+    var _lightSprite: SKSpriteNode?
     var _backgroundSprite1: SKSpriteNode?
     var _backgroundSprite2: SKSpriteNode?
     var _foregroundSprite1: SKSpriteNode?
     var _foregroundSprite2: SKSpriteNode?
-    var _ambientColor:UIColor?
+    var _ambientColor: UIColor?
     
-    override func didMoveToView(view: SKView)
-    {
+    override func didMove(to view: SKView) {
         _screenH = view.frame.height
         _screenW = view.frame.width
         _scale = _screenW / 1920
 
-        _ambientColor = UIColor.darkGrayColor()
+        _ambientColor = UIColor.darkGray
 
         initBackground()
         initSprite()
         initLight()
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
-    {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch: AnyObject in touches {
-            _lightSprite?.position = touch.locationInNode(self)
+            _lightSprite?.position = touch.location(in: self)
         }
     }
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent)
-    {
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch: AnyObject in touches {
-            _lightSprite?.position = touch.locationInNode(self)
+            _lightSprite?.position = touch.location(in: self)
         }
     }
-   
-    override func update(currentTime: CFTimeInterval)
-    {
-        var y:CGFloat = _screenH / 2.0;
-        
-        var backgroundOffset: CGFloat = -CGFloat(Int(currentTime*100) % (1920*2));
+    
+    override func update(_ currentTime: TimeInterval) {
+        let y: CGFloat = _screenH / 2.0;
+
+        let backgroundOffset: CGFloat = -CGFloat(Int(currentTime*100) % (1920*2));
         _backgroundSprite1?.position = CGPoint(x:_scale*((backgroundOffset < -1920) ? (3840+backgroundOffset) : backgroundOffset), y:y)
         _backgroundSprite2?.position = CGPoint(x:_scale*(1920+backgroundOffset), y:y)
 
-        var foregroundOffset: CGFloat = -CGFloat(Int(currentTime*250) % (1920*2));
+        let foregroundOffset: CGFloat = -CGFloat(Int(currentTime*250) % (1920*2));
         _foregroundSprite1?.position = CGPoint(x:_scale*((foregroundOffset < -1920) ? (3840+foregroundOffset) : foregroundOffset), y:y)
         _foregroundSprite2?.position = CGPoint(x:_scale*(1920+foregroundOffset), y:y)
     }
     
-    private func initSprite()
-    {
+    fileprivate func initSprite() {
         var animFrames = [SKTexture]()
         var normals = [SKTexture]()
         for index in 1...8 {
@@ -71,48 +66,47 @@ class GameScene: SKScene {
         let sprite = SKSpriteNode(texture: animFrames[0], normalMap: normals[0])
         
         let fps = 8.0
-
-        let anim = SKAction.customActionWithDuration(1.0, actionBlock: { node, time in
-            let index = Int((fps * Double(time))) % animFrames.count
-            (node as! SKSpriteNode).normalTexture = normals[index]
-            (node as! SKSpriteNode).texture = animFrames[index]
-        })
-        sprite.runAction(SKAction.repeatActionForever(anim));
+        
+        let anim = SKAction.customAction(withDuration: 1.0) { (node, time) in
+                let index = Int((fps * Double(time))) % animFrames.count
+                (node as! SKSpriteNode).normalTexture = normals[index]
+                (node as! SKSpriteNode).texture = animFrames[index]
+        }
+        sprite.run(SKAction.repeatForever(anim))
         
         sprite.position = CGPoint(x: _screenW / 2, y: _screenH / 2 - 75.0 * _scale)
         sprite.setScale(_scale)
         sprite.lightingBitMask = 1
+        //sprite.shadowCastBitMask = 1
         
         addChild(sprite)
     }
     
-    private func initLight()
-    {
+    fileprivate func initLight() {
         _lightSprite = SKSpriteNode(imageNamed: "Sprites/lightbulb.png")
         _lightSprite?.setScale(_scale * 2)
-        _lightSprite?.position = CGPointMake(_screenW - 100, _screenH - 100)
-        addChild(_lightSprite!);
+        _lightSprite?.position = CGPoint(x: _screenW - 100, y: _screenH - 100)
+        addChild(_lightSprite!)
         
-        var light = SKLightNode();
-        light.position = CGPointMake(0,0)
+        let light = SKLightNode()
+        light.position = .zero
         light.falloff = 1
-        light.ambientColor = _ambientColor
-        light.lightColor = UIColor.whiteColor()
+        light.ambientColor = _ambientColor!
+        light.lightColor = .white
+        //light.shadowColor = .black
         
         _lightSprite?.addChild(light)
     }
     
-    private func initBackground()
-    {
-        backgroundColor = SKColor.blackColor()
-        _backgroundSprite1 = addBackgroundTile("Sprites/background_01.png");
-        _backgroundSprite2 = addBackgroundTile("Sprites/background_01.png");
-        _foregroundSprite1 = addForegroundTile("Sprites/foreground_01.png", normalsFile:"Sprites/foreground_01_n.png");
-        _foregroundSprite2 = addForegroundTile("Sprites/foreground_02.png", normalsFile:"Sprites/foreground_02_n.png");
+    fileprivate func initBackground() {
+        backgroundColor = SKColor.black
+        _backgroundSprite1 = addBackgroundTile(spriteFile: "Sprites/background_01.png");
+        _backgroundSprite2 = addBackgroundTile(spriteFile: "Sprites/background_01.png");
+        _foregroundSprite1 = addForegroundTile(spriteFile: "Sprites/foreground_01.png", normalsFile:"Sprites/foreground_01_n.png");
+        _foregroundSprite2 = addForegroundTile(spriteFile: "Sprites/foreground_02.png", normalsFile:"Sprites/foreground_02_n.png");
     }
     
-    private func addForegroundTile(spriteFile: String, normalsFile: String) -> SKSpriteNode
-    {
+    fileprivate func addForegroundTile(spriteFile: String, normalsFile: String) -> SKSpriteNode {
         var foreground:SKSpriteNode
         
         foreground = SKSpriteNode(texture: SKTexture(imageNamed:spriteFile), normalMap: SKTexture(imageNamed:normalsFile));
@@ -125,8 +119,7 @@ class GameScene: SKScene {
         return foreground;
     }
 
-    private func addBackgroundTile(spriteFile: String) -> SKSpriteNode
-    {
+    fileprivate func addBackgroundTile(spriteFile: String) -> SKSpriteNode {
         var background:SKSpriteNode
 
         background = SKSpriteNode(imageNamed:spriteFile);
